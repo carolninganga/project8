@@ -2,7 +2,7 @@
 #CS 5001 
 #Project 8 Classes 
 
-
+import sys
 
 class Lsystem: 
 
@@ -58,3 +58,62 @@ class Lsystem:
 
     # call the close method of the file
     fp.close()
+
+
+def replace(self, istring):
+# assign to a local variable (e.g. tstring) the empty string
+tstring = ""
+    
+    # for each character c in the input string (istring)
+    for c in istring:
+        # set a local variable (e.g. found) to False
+        found = False
+            # for each rule in the rules field of self
+            for rule in self.rules:
+                # if the symbol in the rule is equal to the character in c
+                if symbol == c
+                    # add to tstring the replacement from the rule
+                    # set found to True
+                    # break
+                # if not found
+                    # add to tstring the character c
+                    # return tstring, make sure this statement is not inside the for loop
+
+
+def buildString(self, iterations):
+    # assign to a local variable (e.g. nstring) the base field of self
+    nstring = self.base
+    # for the number of iterations
+    for i in range(iterations)
+        # assign to nstring the result of calling the replace method of self with nstring as the argument
+        nstring = replace( self, nstring):
+    # return nstring
+    return nstring
+
+def main(argv):
+
+    # check the number of arguments entered by the user 
+    if len(argv) < 2:
+      print('Usage: lsystem.py <filename>')
+      exit()
+
+    filename = argv[1]
+    iterations = 2
+
+    lsys = Lsystem()
+
+    lsys.read( filename )
+
+    print( lsys )
+    print( lsys.getBase() )
+    for i in range( lsys.numRules() ):
+      rule = lsys.getRule(i)
+      print( rule[0] + ' -> ' + rule[1] )
+
+    lstr = lsys.buildString( iterations )
+    print( lstr )
+
+    return
+
+if __name__ == "__main__":
+    main(sys.argv)
