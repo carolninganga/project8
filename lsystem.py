@@ -23,7 +23,7 @@ class Lsystem:
 
     #get rule should return the specified rule of self
     def getRule(self, index):
-        return self.rules
+        return self.rules[index]
     #the setBase function should assign to the base field (self.base) the value in b.
     def setBase(self, b):
         self.base = b
@@ -40,55 +40,66 @@ class Lsystem:
         # assign to the rules field of self the empty list
         self.rules = []
         # assign to a variable (e.g. fp) the file object created with filename in read mode
-        fp = (filename)
+        fp = open(filename)
         # for each line in fp 
-        for linn in fp:
+        for line in fp:
             # assign to line the result of calling line.strip()
             line = line.strip()
             # assign to a variable (e.g. words) the result of calling the split() method line
-            words = split()
+            words = line.split()
             # if the first item in words is equal to the string 'base'
+            #print("Words: ", words)
+            #words = ['base', base]
+            #words = ['rule',[symbol, replacement]]
             if words[0] == 'base':
                 # call the setBase method of self with the new base string
-                setBase('base')
+                self.setBase(words[1])
             # else if the first item in words is equal to the string 'rule'
             elif words[0] == 'rule':
                 # call the addRule method of self with the new rule (the slice of words from index 1
-                addRule(words[1:])
+                self.addRule(words[1:])
 
-    # call the close method of the file
-    fp.close()
+        # call the close method of the file
+        fp.close()
 
 
-def replace(self, istring):
-# assign to a local variable (e.g. tstring) the empty string
-tstring = ""
-    
-    # for each character c in the input string (istring)
-    for c in istring:
-        # set a local variable (e.g. found) to False
-        found = False
+    def replace(self, istring):
+    # assign to a local variable (e.g. tstring) the empty string
+        tstring = ""
+        
+        # for each character c in the input string (istring)
+        for c in istring:
+            # set a local variable (e.g. found) to False
+            found = False
             # for each rule in the rules field of self
             for rule in self.rules:
+                #Rule = [symbol, replacement]
                 # if the symbol in the rule is equal to the character in c
-                if symbol == c
+                if rule[0] == c:
                     # add to tstring the replacement from the rule
+                    tstring = tstring + rule[1]
                     # set found to True
+                    found = True
                     # break
-                # if not found
-                    # add to tstring the character c
-                    # return tstring, make sure this statement is not inside the for loop
+                    break   
+            # if not found
+            if found != True:
+                # add to tstring the character c
+                tstring = tstring + c 
+
+        # return tstring, make sure this statement is not inside the for loop
+        return tstring
 
 
-def buildString(self, iterations):
-    # assign to a local variable (e.g. nstring) the base field of self
-    nstring = self.base
-    # for the number of iterations
-    for i in range(iterations)
-        # assign to nstring the result of calling the replace method of self with nstring as the argument
-        nstring = replace( self, nstring):
-    # return nstring
-    return nstring
+    def buildString(self, iterations):
+        # assign to a local variable (e.g. nstring) the base field of self
+        nstring = self.base
+        # for the number of iterations
+        for i in range(iterations):
+            # assign to nstring the result of calling the replace method of self with nstring as the argument
+            nstring = self.replace( nstring)
+        # return nstring
+        return nstring
 
 def main(argv):
 
@@ -113,6 +124,7 @@ def main(argv):
     lstr = lsys.buildString( iterations )
     print( lstr )
 
+#    s2 = "F-FF--F-F-F-FF--F-FF-FF--F-F--F-FF--F-F-F-FF--F-F-F-FF--F-F-F-FF--F-FF-FF--F-F--F-FF--F-F-F-FF--F-F-F-FF--F-F-F-FF--F-FF-FF--F-F--F-FF--F-F-F-FF--F-F-F-FF--F-F-F-FF--F-FF-FF--F-F--F-FF--F-F-F-FF--F-F"
     return
 
 if __name__ == "__main__":
